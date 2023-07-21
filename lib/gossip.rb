@@ -29,9 +29,12 @@ class Gossip
   end
 
   def self.delete(line)
+    # Mets toutes les données du CSV dans une variable
     data = CSV.read('db/gossip.csv')
-    data.delete_at(line - 1) if data[line]
-
+    binding.pry
+    # Enlève la ligne que l'on a spécifié dans la variable
+    data.delete_at(line - 1)
+    # Ecris dans le csv la data modifiée
     CSV.open('db/gossip.csv', 'w') do |csv|
       data.each do |row|
         csv << row
