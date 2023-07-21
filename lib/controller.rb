@@ -19,7 +19,11 @@ class Controller
   end
 
   def index_gossip
-    @gossip.self.all
-    @view.index_gossip
+    @view.index_gossip(Gossip.all)
+  end
+
+  def delete_gossip
+    line = @view.delete_gossip
+    Gossip.delete(line)
   end
 end

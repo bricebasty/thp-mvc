@@ -3,6 +3,7 @@
 require 'pry'
 require 'csv'
 
+# Model of the app
 class Gossip
   attr_reader :author, :content
 
@@ -20,10 +21,21 @@ class Gossip
 
   def self.all
     all_gossips = []
-    CSV.each do |line|
-      temp_gossip = Gossip.new(values[0], values[1])
+    CSV.foreach('db/gossip.csv') do |row|
+      temp_gossip = Gossip.new(row[0], row[1])
       all_gossips << temp_gossip
     end
     all_gossips
+  end
+
+  def self.delete(line)
+    data = CSV.read('db/gossip.csv')
+    data.delete_at(line - 1) if data[line]
+
+    CSV.open('db/gossip.csv', 'w') do |csv|
+      data.each do |row|
+        csv << row
+      end
+    end
   end
 end

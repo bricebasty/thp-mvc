@@ -18,6 +18,8 @@ class Router
 
         Tu veux faire quoi jeune mouss' ?
         1. Je veux créer un gossip
+        2. Je veux afficher tous les gossips
+        3. Je veux supprimer un gossip
         4. Je veux quitter l'app
       ACCUEIL
       print '> '
@@ -29,6 +31,7 @@ class Router
     case gets.chomp.to_i
     when 1 then @controller.create_gossip
     when 2 then @controller.index_gossip
+    when 3 then @controller.delete_gossip
     when 4 then abort "\nAllez Ciao"
     else
       puts '\nEntrée invalide, réessaye'
